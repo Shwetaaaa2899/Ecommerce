@@ -8,6 +8,7 @@ const Cart=()=>{
     useEffect(()=>{
         getCartProducts()
     },[])
+     console.log("cart",state?.cart)
     return <div>cart pge
     {
         state?.loading && <p>Loading....</p>

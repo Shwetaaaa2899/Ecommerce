@@ -53,8 +53,10 @@ const [productToBeShown,setProduct] = useState(product)
   useEffect(()=>{
     const getProductById = async(id) =>{
         try{
-            const request = await getAllProductById( id)
-            const response= await request.data
+            const request = await axios.get(`https://fakestoreapi.com/products/${id}`);
+
+            const response = await request.data;
+         
             console.log("id",response)
             // return response
             setProduct(response)

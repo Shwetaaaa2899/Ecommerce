@@ -32,7 +32,7 @@ export const cartReducer = (state, action) => {
      ,[cartsAdded[0]] );
 
       console.log("cartForUser", cartForUser);
-      return { ...state, cart: cartsAdded };
+      return { ...state, cart: cartForUser };
 
     case "ADD-TO-CART":
       console.log("data", action.payload);

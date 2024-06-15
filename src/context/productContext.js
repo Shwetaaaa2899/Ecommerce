@@ -9,11 +9,11 @@ export const ProductsContext = ({ children }) => {
     try {
       dispatch({ type: "SET-LOADER-ON" });
       const products = await getAllProducts();
-      console.log("prod", products);
+
       dispatch({ type: "SET-LOADER-OFF" });
       dispatch({ type: "SET-PRODUCTS", payload: products });
     } catch (error) {
-      dispatch({ type: "", error });
+      //   dispatch({ type: "", error });
     }
   };
   const getProductById = async (id) => {
@@ -24,7 +24,6 @@ export const ProductsContext = ({ children }) => {
       return response;
     } catch (e) {}
   };
- 
 
   return (
     <ProductProvider.Provider
@@ -35,4 +34,4 @@ export const ProductsContext = ({ children }) => {
   );
 };
 
-export const useProductContextConsumer = () => useContext(ProductProvider);
+export const useProductContext = () => useContext(ProductProvider);

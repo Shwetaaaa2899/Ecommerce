@@ -1,19 +1,24 @@
-import { useEffect,useState } from "react"
-import {useProductContextConsumer} from "../../context/productContext"
-import Card from "../../components/card/Card"
+import { useEffect, useState } from "react";
+import { useProductContext } from "../../context/productContext";
+import Card from "../../components/card/Card";
+import "./Home.css"
+const Home = () => {
+  const { getAllListingProducts, state } = useProductContext();
 
-const Home = () =>{
-    const {getAllListingProducts,state} = useProductContextConsumer()
-useEffect(()=>{
-    getAllListingProducts()
-},[])
-    return <div>
-        home pge
-        {
-            state?.loading && <p>Loading....</p>
-        }
-      {  state?.products?.length > 0 && state?.products?.map((product)=><Card  key = {product?.id} product = {product}/>)
-   
-}</div>
-}
-export default Home
+  useEffect(() => {
+    getAllListingProducts();
+  }, []);
+  return (<div>
+    <div className="container-wrapper ">
+      home pge
+      {state?.loading &&  <p>loading..</p>}
+    {/* //    <ClipLoader />} */}
+      {state?.products?.length > 0 &&
+        state?.products?.map((product) => (
+          <Card key={product?.id} product={product} />
+        ))}
+    </div>
+    </div>
+  );
+};
+export default Home;

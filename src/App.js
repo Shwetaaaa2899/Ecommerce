@@ -1,20 +1,35 @@
 import './App.css';
-import {getAllProducts} from "./apicalls/productsApi"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {Routes,Route,NavLink} from "react-router-dom"
 import Home from "./pages/home/Home"
 import Cart from "./pages/cart/Cart"
+import Navbar from "./components/navbar/Navbar"
+
+import Login from "./pages/auth/Login"
 import ProductDetail from "./pages/product/ProductDetail"
+
 function App() {
-  // console.log("api",getAllProducts())
   return (
     <div className="App">
-      app
+         <Navbar />
+      <ToastContainer
+        position="top-right"
+        reverseOrder={false}
+        containerStyle={{ top: "10%" }}
+        toastOptions={{ style: { maxWidth: 500 } }}
+      />
+      
       <Routes>
-        <Route path = "/" element = {<Home/>} />
+        <Route exact path = "/" element = {<Home/>} />
+
         <Route path  = "/products/:id" element ={<ProductDetail/>} />
         <Route path  = "/cart" element ={<Cart/>} />
+       
+       
+        <Route path  = "/login" element ={<Login/>} />
 
-      </Routes>
+      </Routes> 
     </div>
   );
 }

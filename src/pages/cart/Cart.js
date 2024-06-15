@@ -1,10 +1,10 @@
-import {useCartContextConsumer} from "../../context/cartContext"
+import {useCartContext} from "../../context/cartContext"
 import { useEffect } from "react"
 import Card from "../../components/card/Card"
 
 const Cart=()=>{
-    const {getCartProducts, state} = useCartContextConsumer()
-    console.log("st",state,state?.cart)
+    const {getCartProducts, state} = useCartContext()
+  
     useEffect(()=>{
         getCartProducts()
     },[])

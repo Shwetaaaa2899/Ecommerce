@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom"
-import {useProductContextConsumer} from "../../context/productContext"
+import {useProductContext} from "../../context/productContext"
 import { useEffect, useState } from "react"
 import { CiHeart } from "react-icons/ci";
 const ProductDetail = () =>{
 const {id} = useParams()
 const [product,setProduct] = useState(null)
-const {addToWishlist, getProductById,state} = useProductContextConsumer()
+const {addToWishlist, getProductById,state} = useProductContext()
 
 useEffect(()=>{
  const fetchData =async()=>{

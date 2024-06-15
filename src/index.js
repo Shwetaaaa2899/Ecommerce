@@ -1,22 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {ProductsContext} from "./context/productContext"
-import {CartContext} from "./context/cartContext"
-import { BrowserRouter } from 'react-router-dom';
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ProductsContext } from "./context/productContext";
+import { CartContext } from "./context/cartContext";
+import { AuthContext } from "./context/authContext";
+import { BrowserRouter } from "react-router-dom";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter >
-
-    <ProductsContext >
-      <CartContext>
-    <App />
-    </CartContext>
-    </ProductsContext>
-    </BrowserRouter >
+    <BrowserRouter>
+      <ProductsContext>
+        <AuthContext>
+          <CartContext>
+            <App />
+          </CartContext>
+        </AuthContext>
+      </ProductsContext>
+      {/* </AuthContext>  */}
+    </BrowserRouter>
   </React.StrictMode>
 );
 

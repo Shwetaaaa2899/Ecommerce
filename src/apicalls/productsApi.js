@@ -17,16 +17,6 @@ export const getAllProducts = async () => {
   }
 };
 
-export const getAllProductById = async (id) => {
-  try {
-    const request = await axios.get(`https://fakestoreapi.com/products/${id}`);
-
-    const response = await request.data;
-    return response;
-  } catch (e) {
-    console.log("error occured while fetching products", e);
-  }
-};
 export const getFlattenCartData = (cartArr) => {
   const cartsAdded = cartArr
     ?.map((product) => (product?.userId === 1 ? product?.products : null))
@@ -71,3 +61,4 @@ export const addProductToCart = async (product) => {
     console.log("error occured while adding  product to cart ", e);
   }
 };
+

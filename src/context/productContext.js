@@ -16,18 +16,11 @@ export const ProductsContext = ({ children }) => {
       //   dispatch({ type: "", error });
     }
   };
-  const getProductById = async (id) => {
-    try {
-      dispatch({ type: "SET-LOADER-ON" });
-      const response = await getAllProductById(id);
-      dispatch({ type: "SET-LOADER-OFF" });
-      return response;
-    } catch (e) {}
-  };
+
 
   return (
     <ProductProvider.Provider
-      value={{ state, dispatch, getAllListingProducts, getProductById }}
+      value={{ state, dispatch, getAllListingProducts }}
     >
       {children}
     </ProductProvider.Provider>

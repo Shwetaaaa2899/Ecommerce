@@ -4,11 +4,10 @@ import { toast } from "react-toastify";
 import { useAuthContext } from "../../context/authContext";
 import { useNavigate, Link } from "react-router-dom";
 import "./Card.css";
-import { getAllProductById, formatDate } from "../../apicalls/productsApi";
+import { getAllProductById, formatDate,usecartListHandler } from "../../apicalls/productsApi";
 import axios from "axios";
 import { useEffect, useState } from "react";
 export default function Product({ product, inCart }) {
-  const navigate = useNavigate();
   const {
     addProductToCartById,
     state: { cart, loading },
@@ -18,15 +17,14 @@ export default function Product({ product, inCart }) {
   const {
     state: { token, isLoggedIn },
   } = useAuthContext();
-
+const navigate = useNavigate()
   const [productToBeShown, setProduct] = useState(product);
-  const [isCartProduct, setCartProduct] = useState(inCart);
   const cartListHandler = (product) => {
     if (token === null) {
       toast("Please login first to add in cart products");
       navigate("/login");
     } else if (handlecartlistCheck(product, cart)) {
-      setCartProduct(1);
+   
       navigate("/cart");
     } else {
       dispatch({ type: "SET-LOADER-ON" });
@@ -82,7 +80,7 @@ export default function Product({ product, inCart }) {
         <p>Loading...</p>
       ) : (
         <>
-          <Link to={`/product/${productToBeShown._id}`}>
+          <Link to={`/products/${productToBeShown.id}`}>
             <div className="card-img">
               <img src={productToBeShown?.image} />
             </div>
@@ -112,7 +110,7 @@ export default function Product({ product, inCart }) {
                 </p>
               </div>
            
-              {isCartProduct === 1 &&   <div className="price-details">
+              {inCart === 1 &&   <div className="price-details">
                 <p>
                   Quanity: <strong>{product?.quantity ?? 1}</strong>
                 </p>
@@ -121,9 +119,9 @@ export default function Product({ product, inCart }) {
             </div>
           </Link>
 
-          {isCartProduct !== 1 ? (
+          {inCart !== 1 ? (
             <div className="icons-section">
-              <button onClick={() => cartListHandler(productToBeShown)}>
+              <button onClick={() => cartListHandler( productToBeShown)}>
                 {handlecartlistCheck(productToBeShown, cart)
                   ? "Go to Cart"
                   : "Add to Cart"}

@@ -54,6 +54,11 @@ export default function Product({ product, inCart }) {
     };
     addQuantityOfProductInCart(data);
   };
+  const getPrice = (price)=>{
+    const temp = Number(price)
+    console.log("kk",(parseInt(price)?? temp+ 1000))
+    return Number(price) + 1000
+  }
 
   useEffect(() => {
     const getProductById = async (id) => {
@@ -63,8 +68,6 @@ export default function Product({ product, inCart }) {
         );
 
         const response = await request.data;
-console.log('response for id',response)
-console.log(" {parseFloat(product?.price) + 1000}", typeof(response?.price))
         setProduct(response);
       } catch (e) {
         console.log("error occured while fetching details by product id");
@@ -103,9 +106,11 @@ console.log(" {parseFloat(product?.price) + 1000}", typeof(response?.price))
 
             <p>
               <span className="mrp">
-                MRP :₹
-                {parseInt(product?.price) + 1000}
-                {Number(product?.price) + 10}
+              {!isCartProduct &&  
+              <>MRP :₹ {product?.price + 1000}</>
+             
+
+                }
               </span>{" "}
               (50% off)
             </p>

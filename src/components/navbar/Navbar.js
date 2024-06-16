@@ -23,9 +23,10 @@ export default function Navbar() {
     toast("You have been logged out");
   };
   useEffect(()=>{
+    console.log("called")
     getCartProducts()
 
-  },[cart])
+  },[])
   return (
     <>
       <nav>

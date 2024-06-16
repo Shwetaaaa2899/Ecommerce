@@ -1,6 +1,6 @@
 export const initialState = {
-  cart: [],
-  totalprice: 0,
+  cart: localStorage?.getItem('cart')?.length > 0 ?localStorage?.getItem('cart') : [],
+
   loading: false,
 };
 

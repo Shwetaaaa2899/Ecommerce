@@ -37,7 +37,6 @@ const Login = ()=> {
     navigate("/")
 
   };
-console.log("auth",authInfo)
 
 return (
   <div>

@@ -16,20 +16,21 @@ export const CartContext = ({ children }) => {
     try {
       dispatch({ type: "SET-LOADER-ON" });
       let products = [];
-      if (JSON.parse(localStorage.getItem("cart")?.length > 0)) {
-        console.log("ls", localStorage.getItem("cart"));
-
-        products = JSON.parse(localStorage.getItem("cart"));
+      if (localStorage.getItem("cart")?.length > 0) {
+console.log(localStorage.getItem("cart"))
+console.log(JSON.parse(localStorage.getItem("cart")))
+        // products = JSON.parse(localStorage.getItem("cart"));
+        //   const finalProduct = getFlattenCartData(products);
       } else {
-        console.log("else");
 
         products = await getAllCartProducts();
       }
-      const finalProduct = getFlattenCartData(products);
-      console.log("flat", finalProduct);
-      localStorage.setItem("cart", finalProduct);
+    
+
+      localStorage.setItem("cart", products);
+      console.log("setted",products)
       dispatch({ type: "SET-LOADER-OFF" });
-      dispatch({ type: "SET-CART-PRODUCTS", payload: finalProduct });
+      dispatch({ type: "SET-CART-PRODUCTS", payload: products });
     } catch (error) {
       console.log("error", error );
     }
@@ -73,12 +74,12 @@ export const CartContext = ({ children }) => {
   };
 
   const handlecartlistCheck = (product) => {
-    console.log(
-      state?.cart?.some((item) => item?.id === product?.id),
-      "prod",
-      product?.id
-    );
-    return state?.cart?.some((item) => item?.id === product?.id);
+ 
+    if(state?.cart?.length > 0 ){
+      return true
+        // return state?.cart?.some((item) => item?.id === product?.id);
+
+    }
   };
   return (
     <CartProvider.Provider

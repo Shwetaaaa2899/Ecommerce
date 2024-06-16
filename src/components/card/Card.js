@@ -21,9 +21,7 @@ export default function Product({ product, wishlist: wishlistCheck }) {
 
 const [productToBeShown,setProduct] = useState(product)
   const cartListHandler = (product) => {
-    console.log("called on clikc-null", token);
     if (token === null) {
-        console.log("token-null", token);
       toast("Please login first to add in cart products");
       navigate("/login");
     } 
@@ -32,7 +30,6 @@ const [productToBeShown,setProduct] = useState(product)
     //     navigate("/cart");
     //   }
        else {
-        console.log("api-call");
         const productToBePassed = {
           userId: 1,
           date: new Date(),

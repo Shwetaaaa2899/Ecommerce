@@ -49,8 +49,8 @@ export const getAllCartProducts = async () => {
   try {
     const request = await axios.get("https://fakestoreapi.com/carts/user/1");
     const response = await request.data;
-    
-    return response;
+   
+     return getFlattenCartData(response)
   } catch (e) {
     console.log("error occured while fetching products", e);
   }

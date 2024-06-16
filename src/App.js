@@ -29,7 +29,7 @@ function App() {
        
        
         <Route path  = "/login" element ={<Login/>} />
-        <Route path  = "/*" element={<NoResource/>} />
+        <Route path  = "*" element={<NoResource/>} />
 
       </Routes> 
     </div>

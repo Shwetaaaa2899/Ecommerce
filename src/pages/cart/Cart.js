@@ -1,7 +1,7 @@
 import {useCartContext} from "../../context/cartContext"
 import { useEffect, useState } from "react"
 import Card from "../../components/card/Card"
-
+import "./Cart.css"
 const Cart=()=>{
     const {getCartProducts,dispatch, state} = useCartContext()
     useEffect(()=>{

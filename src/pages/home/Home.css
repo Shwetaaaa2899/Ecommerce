@@ -3,10 +3,13 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    /* margin-top:500px; */
 
 }
-.container-wrapper {
+.wrapper{
+ padding-top: 120px;
+
+}
+.cards-parent-container {
 
     display: flex;
     gap: 10%;
@@ -14,16 +17,5 @@
     width: 80%;
     margin-top:100px;
     margin: 0 auto;
-
-}
-.left-container {
-    flex-basis: 20%;
-    margin-top: 0.5rem;
-    margin-top: 1rem;
-}
-.right-container {
-    flex: 80%;
-    margin-top: 30px;
-    /* background-color: aqua; */
 
 }

@@ -1,15 +1,16 @@
 import {useCartContext} from "../../context/cartContext"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Card from "../../components/card/Card"
 
 const Cart=()=>{
     const {getCartProducts, state} = useCartContext()
-  
     useEffect(()=>{
+    
         getCartProducts()
     },[])
-     console.log("cart",state?.cart)
-    return <div>cart pge
+    console.log("cart",state?.cart)
+  
+    return <div>
     {
         state?.loading && <p>Loading....</p>
     }

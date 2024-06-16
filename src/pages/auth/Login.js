@@ -1,12 +1,12 @@
 import { useAuthContext } from "../../context/authContext"
-import { useNavigate ,NavLink,useLocation} from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 import { useState} from "react"
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-toastify";
-// import "./Form.css"
+import "./Login.css"
 const Login = ()=> {
-const location = useLocation();
+
   const navigate = useNavigate();
   const {loginHandler} = useAuthContext()
   const guestModeData = {
@@ -37,7 +37,7 @@ const location = useLocation();
     navigate("/")
 
   };
-
+console.log("auth",authInfo)
 
 return (
   <div>
@@ -45,24 +45,21 @@ return (
     <div className="login-container">
      
         <div className="form-box">
-          <div className="header-login">
-            <h3>Welcome to the KLEN ECommerece</h3>
-          </div>
+         
 
-          <form className="form-login" onSubmit={loginAsGuestHandler}>
+          <form className="form-login" >
           
               <label>
                 <p>
-                  <h3>Email:</h3>
+                  <h3>Username:</h3>
 
                   <input
                     required
                     value={authInfo?.username}
                     type="text"
                     name="username"
-                    // onChange={setUserInfoHandler}
-                    placeholder="Your Email"
-                  />
+                    placeholder="Your username"
+                  />    
                 </p>
               </label>
 
@@ -73,7 +70,6 @@ return (
                   <input
                     required
                     value={authInfo?.password}
-                    // onChange={setUserInfoHandler}
                     className="password"
                     name="password"
                     type={passwordVisible ? "text" : "password"}
@@ -95,7 +91,7 @@ return (
 
               <div className="btn-login-container">
                
-                <button  className="submitBtn">
+                <button type = "submit" onClick={loginAsGuestHandler} className="submitBtn">
                   Login As Guest?
                 </button>
               </div>

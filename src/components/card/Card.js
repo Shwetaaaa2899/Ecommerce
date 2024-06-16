@@ -21,22 +21,27 @@ export default function Product({ product, wishlist: wishlistCheck }) {
 
 const [productToBeShown,setProduct] = useState(product)
   const cartListHandler = (product) => {
-    console.log("token", token, isLoggedIn);
+    console.log("called on clikc-null", token);
     if (token === null) {
+        console.log("token-null", token);
       toast("Please login first to add in cart products");
       navigate("/login");
-    } else {
-      if (cart?.length > 0 && cart?.some((item) => item._id === product._id)) {
-        navigate("/cart");
-      } else {
+    } 
+    // else if (cart?.length > 0 && cart?.some((item) => item._id === product._id)) {
+    //     console.log("nav-cart");
+    //     navigate("/cart");
+    //   }
+       else {
+        console.log("api-call");
         const productToBePassed = {
           userId: 1,
           date: new Date(),
           products: [{ productId: product?.id, quantity: 1 }],
         };
+        console.log("productToBePassed",productToBePassed);
         addProductToCartById(productToBePassed);
       }
-    }
+    
   };
 
   const increaseProductQuantity = (e, product) => {
@@ -48,7 +53,7 @@ const [productToBeShown,setProduct] = useState(product)
     };
     addQuantityOfProductInCart(data);
   };
-  console.log(" product?.productId ", product )
+  
 
   useEffect(()=>{
     const getProductById = async(id) =>{
@@ -57,8 +62,7 @@ const [productToBeShown,setProduct] = useState(product)
 
             const response = await request.data;
          
-            console.log("id",response)
-            // return response
+           
             setProduct(response)
         }
             catch(e){

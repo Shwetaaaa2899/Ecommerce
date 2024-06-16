@@ -1,0 +1,54 @@
+.login-container{
+        display: flex;
+        width: 800px;
+        height: 500px;
+       
+        margin: 0 auto;
+        margin-top: 5rem;
+        margin-left:40%;
+    border:1px solid white
+
+      
+}
+.form-login {
+    margin: 5rem;
+  }
+  input {
+    margin-left: 2rem;
+    padding:10px
+  }
+  .btn-login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .submitBtn {
+    width: 5rem;
+    margin-left: 1rem;
+    font-size: 14px;
+    color:black;
+  }
+
+  .submitBtn:hover {
+    background-color: transparent;
+    color: brown;
+    cursor: pointer;
+  }
+  .password-input{
+    width: 200px;
+
+    display: flex;
+    position: relative;
+  }
+  .password-input input {
+    width: 200px;
+
+  }
+   
+  .password-input span {
+    right: 0;
+    position: absolute;
+    top: 5px;
+    color: black;
+    padding-right: 10px;
+  }

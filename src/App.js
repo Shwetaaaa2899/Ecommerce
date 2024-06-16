@@ -5,7 +5,7 @@ import {Routes,Route,NavLink} from "react-router-dom"
 import Home from "./pages/home/Home"
 import Cart from "./pages/cart/Cart"
 import Navbar from "./components/navbar/Navbar"
-
+import RequiresAuth from "./components/requiresauth/RequiresAuth"
 import Login from "./pages/auth/Login"
 import ProductDetail from "./pages/product/ProductDetail"
 
@@ -24,7 +24,7 @@ function App() {
         <Route exact path = "/" element = {<Home/>} />
 
         <Route path  = "/products/:id" element ={<ProductDetail/>} />
-        <Route path  = "/cart" element ={<Cart/>} />
+        <Route path  = "/cart" element ={<RequiresAuth><Cart/></RequiresAuth>} />
        
        
         <Route path  = "/login" element ={<Login/>} />

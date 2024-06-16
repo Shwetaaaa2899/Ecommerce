@@ -7,28 +7,30 @@ import "./Card.css";
 import {getAllProductById} from "../../apicalls/productsApi"
 import axios from "axios";
 import { useEffect, useState } from "react";
-export default function Product({ product, wishlist: wishlistCheck }) {
+export default function Product({ product, inCart }) {
   const navigate = useNavigate();
   const {
     addProductToCartById,
     state: { cart },
     handlecartlistCheck,
-    addQuantityOfProductInCart
+    addQuantityOfProductInCart,
   } = useCartContext();
   const {
     state: { token, isLoggedIn },
   } = useAuthContext();
 
 const [productToBeShown,setProduct] = useState(product)
+const [isCartProduct , setCartProduct] = useState(inCart)
   const cartListHandler = (product) => {
     if (token === null) {
       toast("Please login first to add in cart products");
       navigate("/login");
     } 
-    // else if (cart?.length > 0 && cart?.some((item) => item._id === product._id)) {
-    //     console.log("nav-cart");
-    //     navigate("/cart");
-    //   }
+    else if (handlecartlistCheck(product,cart)) {
+   
+        setCartProduct(1)
+        navigate("/cart");
+      }
        else {
         const productToBePassed = {
           userId: 1,
@@ -68,6 +70,7 @@ const [productToBeShown,setProduct] = useState(product)
       }
     product?.productId && 
     getProductById( product?.productId )
+
   },[product])
 
   return (
@@ -105,11 +108,13 @@ const [productToBeShown,setProduct] = useState(product)
         </div>
       </Link>
 
+{isCartProduct !== 1 &&
       <div className="icons-section">
         <button onClick={() => cartListHandler(product)}>
-          {handlecartlistCheck(product) ? "Go to Cart" : "Add to Cart"}
+          {handlecartlistCheck(product,cart) ? "Go to Cart" : "Add to Cart"}
         </button>
       </div>
+}
     </div>
   );
 }

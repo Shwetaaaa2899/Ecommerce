@@ -17,18 +17,12 @@ export const CartContext = ({ children }) => {
       dispatch({ type: "SET-LOADER-ON" });
       let products = [];
       if (localStorage.getItem("cart")?.length > 0) {
-console.log(localStorage.getItem("cart"))
-console.log(JSON.parse(localStorage.getItem("cart")))
-        // products = JSON.parse(localStorage.getItem("cart"));
-        //   const finalProduct = getFlattenCartData(products);
+    products = JSON.parse(localStorage.getItem("cart"));
       } else {
 
         products = await getAllCartProducts();
       }
-    
-
-      localStorage.setItem("cart", products);
-      console.log("setted",products)
+    localStorage.setItem("cart", products);
       dispatch({ type: "SET-LOADER-OFF" });
       dispatch({ type: "SET-CART-PRODUCTS", payload: products });
     } catch (error) {
@@ -42,10 +36,8 @@ console.log(JSON.parse(localStorage.getItem("cart")))
         date: new Date(),
         products: product?.products,
       };
-      console.log("satgae1", productToBePassed);
 
       const response = await addProductToCart(productToBePassed);
-      console.log("prod", response);
 
       dispatch({ type: "ADD-TO-CART", payload: response });
     } catch (error) {
@@ -73,11 +65,14 @@ console.log(JSON.parse(localStorage.getItem("cart")))
     }
   };
 
-  const handlecartlistCheck = (product) => {
+  const handlecartlistCheck = (product,cart) => {
  
-    if(state?.cart?.length > 0 ){
-      return true
-        // return state?.cart?.some((item) => item?.id === product?.id);
+    if(cart?.length > 0 ){
+    //   return true
+const flag = cart?.some((item) => console.log(item))
+console.log("flag",flag,cart ,product?.productId)
+
+        return cart?.some((item) => item?.productId === product?.id);
 
     }
   };

@@ -16,7 +16,7 @@ const Home = () => {
       {state?.loading &&     <ClipLoader />} 
       {state?.products?.length > 0 &&
         state?.products?.map((product) => (
-          <Card key={product?.id} product={product} />
+          <Card key={product?.id} product={product} inCart = {0}/>
         ))}
     </div>
     </div>

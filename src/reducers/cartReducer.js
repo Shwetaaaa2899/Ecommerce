@@ -22,7 +22,8 @@ const {products} = action.payload
       return { ...state, cart };
 
     case "REMOVE-FROM-CART":
-      const cartUpdated = [...state.cart].filter(
+      console.log("called remove",action.payload)
+      const cartUpdated = [...state?.cart].filter(
         (prod) => prod?.productId !== action.payload
       );
       localStorage.setItem("cart",cartUpdated)

@@ -40,6 +40,7 @@ export default function Product({ product, inCart }) {
     }
   };
   const removeProductHandler = (product) => {
+
     dispatch({ type: "REMOVE-FROM-CART", payload: product?.productId });
   };
 
@@ -122,7 +123,7 @@ export default function Product({ product, inCart }) {
             </div>
           ) : (
             <div className="icons-section">
-              <button onClick={() => removeProductHandler(productToBeShown)}>
+              <button onClick={() => removeProductHandler(product)}>
                 Remove From Cart
               </button>
               {/* <div className="action-btn-div">

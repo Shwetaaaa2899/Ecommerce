@@ -121,3 +121,7 @@
   .star-div:hover{
     cursor:pointer
   }
+
+  .action-btn-div .action{
+    margin-left:10px
+  }

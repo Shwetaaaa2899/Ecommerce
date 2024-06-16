@@ -6,6 +6,7 @@ const Cart=()=>{
     const {getCartProducts,dispatch, state} = useCartContext()
     useEffect(()=>{
         dispatch({type: "SET-LOADER-ON" })
+        console.log("called on +")
         getCartProducts()
         dispatch({type: "SET-LOADER-OFF" })
     },[state?.cart])

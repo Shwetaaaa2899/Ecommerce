@@ -6,6 +6,7 @@ import {
   getAllProductById,
   formatDate,
   getFlattenCartData,
+  increaseCartQuant
 } from "../apicalls/productsApi";
 const CartProvider = createContext();
 export const CartContext = ({ children }) => {
@@ -47,10 +48,12 @@ export const CartContext = ({ children }) => {
 
 
 
-  const addQuantityOfProductInCart = async (product) => {
+  const addQuantityOfProductInCart = async ({products}) => {
     try {
+        console.log("pr",products)
 
-      dispatch({ type: "REMOVE-FROM-CART", payload: product?.id });
+      
+      dispatch({ type: "INCREASE-QUANTITY", payload: products?.productId });
     } catch (error) {
       dispatch({ type: "", error });
     }

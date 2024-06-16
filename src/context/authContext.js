@@ -10,7 +10,6 @@ export const AuthContext = ({ children }) => {
       const request = await axios.post("https://fakestoreapi.com/auth/login",{username,password})
       const response = await request.data
       
-      console.log("response in context", response);
       dispatch({ type: "SET-TOKEN", payload: response.token });
     } catch (e) {
       console.log("some issue occured while doing login call ",e);

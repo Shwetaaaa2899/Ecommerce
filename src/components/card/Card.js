@@ -11,10 +11,9 @@ export default function Product({ product, inCart }) {
   const navigate = useNavigate();
   const {
     addProductToCartById,
-    state: { cart,loading },
+    state: { cart, loading },
     dispatch,
     handlecartlistCheck,
-    addQuantityOfProductInCart,
   } = useCartContext();
   const {
     state: { token, isLoggedIn },
@@ -30,7 +29,7 @@ export default function Product({ product, inCart }) {
       setCartProduct(1);
       navigate("/cart");
     } else {
-        dispatch({ type: "SET-LOADER-ON" });
+      dispatch({ type: "SET-LOADER-ON" });
       const productToBePassed = {
         userId: 1,
         date: formatDate(new Date()),
@@ -40,25 +39,17 @@ export default function Product({ product, inCart }) {
       dispatch({ type: "SET-LOADER-OFF" });
     }
   };
-  const removeProductHandler = (product)=>{
-    console.log("pr",product)
-    dispatch({type: "REMOVE-FROM-CART", payload:product?.productId})
-  }
+  const removeProductHandler = (product) => {
+    dispatch({ type: "REMOVE-FROM-CART", payload: product?.productId });
+  };
 
   const increaseProductQuantity = (e, product) => {
     e.preventDefault();
-    const data = {
-      userId: 1,
-      date: new Date().format("dd-m-yy"),
-      products: [{ productId: product?.id, quantity: product?.quantity }],
-    };
-    addQuantityOfProductInCart(data);
+    //calling direct dispatch since adding newly based item wont be found for the
+    //current user due to read-only-mode for backend
+    console.log(product);
+    dispatch({ type: "INCREASE-QUANTITY", payload: product?.productId });
   };
-  const getPrice = (price)=>{
-    const temp = Number(price)
-    console.log("kk",(parseInt(price)?? temp+ 1000))
-    return Number(price) + 1000
-  }
 
   useEffect(() => {
     const getProductById = async (id) => {
@@ -74,68 +65,84 @@ export default function Product({ product, inCart }) {
       }
     };
     product?.productId && getProductById(product?.productId);
-  }, [product]);
+  }, [product, cart]);
 
   return (
-    
     <div className="card">
-        {loading ? <p>Loading...</p>
-        :<>
-        
-      <Link to={`/product/${productToBeShown._id}`}>
-        <div className="card-img">
-          <img src={productToBeShown?.image} />
-        </div>
-        <div className="star-div">{productToBeShown.star} ⭐</div>
-        <div className="card-info">
-          <h3 className="card-title">{productToBeShown.title}</h3>
-          <small>
-            {productToBeShown.genre === "men"
-              ? "Men's Wear"
-              : productToBeShown.genre === "women"
-              ? "WoMen's Wear"
-              : productToBeShown.genre === "sports"
-              ? "Sports Wear"
-              : productToBeShown.genre === "casual"
-              ? "Casual Wear"
-              : "Kid's Wear"}
-          </small>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <Link to={`/product/${productToBeShown._id}`}>
+            <div className="card-img">
+              <img src={productToBeShown?.image} />
+            </div>
+            <div className="star-div">{productToBeShown.star} ⭐</div>
+            <div className="card-info">
+              <h3 className="card-title">{productToBeShown.title}</h3>
+              <small>
+                {productToBeShown.genre === "men"
+                  ? "Men's Wear"
+                  : productToBeShown.genre === "women"
+                  ? "WoMen's Wear"
+                  : productToBeShown.genre === "sports"
+                  ? "Sports Wear"
+                  : productToBeShown.genre === "casual"
+                  ? "Casual Wear"
+                  : "Kid's Wear"}
+              </small>
 
-          <div className="price-details">
-            <p>Price:₹ {productToBeShown?.price}</p>
+              <div className="price-details">
+                <p>Price:₹ {productToBeShown?.price}</p>
 
-            <p>
-              <span className="mrp">
-              {!isCartProduct &&  
-              <>MRP :₹ {product?.price + 1000}</>
-             
+                <p>
+                  <span className="mrp">
+                MRP :₹ {productToBeShown?.price + 1000}
+                  </span>{" "}
+                  (50% off)
+                </p>
+              </div>
+           
+              {isCartProduct === 1 &&   <div className="price-details">
+                <p>
+                  Quanity: <strong>{product?.quantity ?? 1}</strong>
+                </p>
+              </div>
+}
+            </div>
+          </Link>
 
-                }
-              </span>{" "}
-              (50% off)
-            </p>
-          </div>
-        </div>
-      </Link>
-
-      {isCartProduct !== 1 ? (
-        <div className="icons-section">
-          <button onClick={() => cartListHandler(product)}>
-            {handlecartlistCheck(product, cart) ? "Go to Cart" : "Add to Cart"}
-          </button>
-        </div>
-      )
-    :
-    <div className="icons-section">
-    <button onClick={() => removeProductHandler(product)}>
-Remove From Cart
-    </button>
-  </div>
-    }
-      </> }
-    
+          {isCartProduct !== 1 ? (
+            <div className="icons-section">
+              <button onClick={() => cartListHandler(productToBeShown)}>
+                {handlecartlistCheck(productToBeShown, cart)
+                  ? "Go to Cart"
+                  : "Add to Cart"}
+              </button>
+            </div>
+          ) : (
+            <div className="icons-section">
+              <button onClick={() => removeProductHandler(productToBeShown)}>
+                Remove From Cart
+              </button>
+              {/* <div className="action-btn-div">
+                <button
+                  className="action"
+                  onClick={(e) => increaseProductQuantity(e, product)}
+                >
+                  +
+                </button>
+                <button
+                  className="action"
+                  onClick={() => removeProductHandler(product)}
+                >
+                  -
+                </button>
+              </div> */}
+            </div>
+          )}
+        </>
+      )}
     </div>
-
   );
-
 }

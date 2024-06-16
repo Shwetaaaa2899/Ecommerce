@@ -24,7 +24,6 @@ export default function Navbar() {
     toast("You have been logged out");
   };
   useEffect(()=>{
-    console.log("token",token)
   token !== null ?
     getCartProducts()
     :

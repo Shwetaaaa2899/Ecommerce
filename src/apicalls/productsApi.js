@@ -1,13 +1,12 @@
 import axios from "axios";
 
-export const  formatDate=(date)=> {
-    console.log("date",date)
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
-    const day = String(date.getDate()).padStart(2, '0');
-    
-    return `${year}-${month}-${day}`;
-  }
+export const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is zero-indexed
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
 export const getAllProducts = async () => {
   try {
     const request = await axios.get("https://fakestoreapi.com/products");
@@ -20,45 +19,42 @@ export const getAllProducts = async () => {
 
 export const getAllProductById = async (id) => {
   try {
-   
     const request = await axios.get(`https://fakestoreapi.com/products/${id}`);
 
     const response = await request.data;
-    console.log("of api",response)
-    return 123;
-
+    return response;
   } catch (e) {
     console.log("error occured while fetching products", e);
   }
 };
 export const getFlattenCartData = (cartArr) => {
-    const cartsAdded = cartArr
-      ?.map((product) => (product?.userId === 1 ? product?.products : null))
-      .flat();
-    const cartForUser = cartsAdded?.reduce(
-      (acc, product) => {
-        // Check if productId already exists in accumulator
-        const existingProductIndex = acc?.findIndex(
-          (p) => p.productId === product?.productId
-        );
-        if (existingProductIndex === -1) {
-          // If productId doesn't exist, add product to accumulator
-          acc.push(product);
-        }
+  const cartsAdded = cartArr
+    ?.map((product) => (product?.userId === 1 ? product?.products : null))
+    .flat();
+  const cartForUser = cartsAdded?.reduce(
+    (acc, product) => {
+      // Check if productId already exists in accumulator
+      const existingProductIndex = acc?.findIndex(
+        (p) => p.productId === product?.productId
+      );
+      if (existingProductIndex === -1) {
+        // If productId doesn't exist, add product to accumulator
+        acc.push(product);
+      }
 
-        return acc;
-      },
-      [cartsAdded[0]]
-    );
-    return cartForUser;
-  };
+      return acc;
+    },
+    [cartsAdded[0]]
+  );
+  return cartForUser;
+};
 
 export const getAllCartProducts = async () => {
   try {
     const request = await axios.get("https://fakestoreapi.com/carts/user/1");
     const response = await request.data;
-   
-     return getFlattenCartData(response)
+
+    return getFlattenCartData(response);
   } catch (e) {
     console.log("error occured while fetching products", e);
   }
@@ -66,8 +62,7 @@ export const getAllCartProducts = async () => {
 
 export const addProductToCart = async (product) => {
   try {
-    const request = await axios.post("https://fakestoreapi.com/carts", 
-        product);
+    const request = await axios.post("https://fakestoreapi.com/carts", product);
 
     const response = await request.data;
     console.log("res", response);
@@ -75,22 +70,4 @@ export const addProductToCart = async (product) => {
   } catch (e) {
     console.log("error occured while adding  product to cart ", e);
   }
-};
-
-const increaseCartQuant = async (product) => {
-  try {
-    const request = axios.put(
-      `https://fakestoreapi.com/carts/${product?.id}`,
-      product
-    );
-  } catch (e) {
-    console.log("some issue occured while updating quantity");
-  }
-};
-
-export default {
-  getAllProducts,
-  getAllProductById,
-  addProductToCart,
-  getAllCartProducts,
 };

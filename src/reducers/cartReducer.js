@@ -1,3 +1,5 @@
+import { PiOvenDuotone } from "react-icons/pi";
+
 export const initialState = {
   cart: localStorage?.getItem('cart')?.length > 0 ?localStorage?.getItem('cart') : [],
 
@@ -28,7 +30,22 @@ const {products} = action.payload
       );
       localStorage.setItem("cart",cartUpdated)
       return { ...state, cart: cartUpdated };
-   
+      case "INCREASE-QUANTITY":
+        const cartAfterIncr = [...state?.cart].map(
+          (prod) => prod?.productId === action.payload?
+        {...prod,quantity:prod.quantity+1}:prod
+        );
+        localStorage.setItem("cart",cartAfterIncr)
+        return { ...state, cart: cartAfterIncr };
+
+        case "DECREASE-QUANTITY":
+        const cartAfterDecr = [...state?.cart].map(
+          (prod) => prod?.productId === action.payload?
+        {...prod,quantity:prod.quantity-1}:prod
+        );
+        localStorage.setItem("cart",cartAfterDecr)
+        return { ...state, cart: cartAfterDecr };
+     
     case "EMPTY-CART":
       localStorage.removeItem("cart")
      

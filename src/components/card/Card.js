@@ -51,6 +51,14 @@ export default function Product({ product, inCart }) {
     console.log(product);
     dispatch({ type: "INCREASE-QUANTITY", payload: product?.productId });
   };
+  const decrementProductQuantity = (e, product) => {
+    e.preventDefault();
+    //calling direct dispatch since adding newly based item wont be found for the
+    //current user due to read-only-mode for backend
+    console.log(product);
+    dispatch({ type:  "DECREASE-QUANTITY", payload: product?.productId });
+  };
+ 
 
   useEffect(() => {
     const getProductById = async (id) => {
@@ -126,7 +134,7 @@ export default function Product({ product, inCart }) {
               <button onClick={() => removeProductHandler(product)}>
                 Remove From Cart
               </button>
-              {/* <div className="action-btn-div">
+              <div className="action-btn-div">
                 <button
                   className="action"
                   onClick={(e) => increaseProductQuantity(e, product)}
@@ -135,11 +143,11 @@ export default function Product({ product, inCart }) {
                 </button>
                 <button
                   className="action"
-                  onClick={() => removeProductHandler(product)}
+                  onClick={(e) =>product?.quantity > 1 && decrementProductQuantity(e,product)}
                 >
                   -
                 </button>
-              </div> */}
+              </div>
             </div>
           )}
         </>

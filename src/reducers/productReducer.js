@@ -7,9 +7,7 @@ export const productsReducer = (state, action) => {
       return { ...state, loading: true };
     case "SET-LOADER-OFF":
       return { ...state, loading: false };
- 
 
-   
     default:
       return state;
   }
@@ -19,5 +17,4 @@ export const initialState = {
   islaoding: true,
   products: [],
   loading: false,
- 
 };

@@ -8,6 +8,7 @@ import Navbar from "./components/navbar/Navbar"
 import RequiresAuth from "./components/requiresauth/RequiresAuth"
 import Login from "./pages/auth/Login"
 import ProductDetail from "./pages/product/ProductDetail"
+import NoResource from "./pages/noResource/NoResource"
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
        
        
         <Route path  = "/login" element ={<Login/>} />
+        <Route path  = "/*" element={<NoResource/>} />
 
       </Routes> 
     </div>

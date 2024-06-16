@@ -15,18 +15,22 @@ export default function Navbar() {
     state: { token },
   } = useAuthContext();
   const {
-    state: { cart },getCartProducts
+    state: { cart },getCartProducts,dispatch :cartDispatch
   } = useCartContext();
 
   const logoutHandler = () => {
+    cartDispatch({type:"EMPTY-CART"})
     dispatch({ type: "LOGOUT" });
     toast("You have been logged out");
   };
   useEffect(()=>{
-    console.log("called")
+    console.log("token",token)
+  token !== null ?
     getCartProducts()
+    :
+    cartDispatch({type:"EMPTY-CART"})
 
-  },[])
+  },[token])
   return (
     <>
       <nav>

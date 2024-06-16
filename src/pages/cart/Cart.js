@@ -8,14 +8,14 @@ const Cart=()=>{
         dispatch({type: "SET-LOADER-ON" })
         getCartProducts()
         dispatch({type: "SET-LOADER-OFF" })
-    },[])
+    },[state?.cart])
   
     return   <div className="wrapper">
     <div className="cards-parent-container ">
     {
         state?.loading ? <p>Loading....</p>
     :
-    state?.cart?.length > 0 && state?.cart?.map((product)=><Card  key = {product?.id} product = {product} inCart = {1}/>)
+    state?.cart?.length > 0 && state?.cart?.map((product)=><Card  key = {product?.productId} product = {product} inCart = {1}/>)
 
 }</div>
 </div>

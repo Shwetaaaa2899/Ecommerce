@@ -16,14 +16,17 @@ export const cartReducer = (state, action) => {
       return { ...state, cart: carts };
 
     case "ADD-TO-CART":
-      const cart = [...state?.cart, , action.payload];
-      console.log("data", action.payload, cart);
+const {products} = action.payload
+
+   const cart = [...state?.cart].concat(products[0]);
+    localStorage.setItem("cart",cart)
       return { ...state, cart };
 
     case "REMOVE-FROM-CART":
       const cartUpdated = [...state.cart].filter(
-        (prod) => prod?.id !== action.payload.id
+        (prod) => prod?.productId !== action.payload
       );
+      localStorage.setItem("cart",cartUpdated)
       return { ...state, cart: cartUpdated };
     case "INCREASE-QUANTITY":
       const increasedCartProduct = [...state.cart]?.map((prod) =>
@@ -37,6 +40,8 @@ export const cartReducer = (state, action) => {
       return { ...state, cart: decreasedCartProduct };
 
     case "EMPTY-CART":
+      localStorage.removeItem("cart")
+      console.log(localStorage.getItem("cart"))
       return { ...state, cart: [] };
     default:
       return state;

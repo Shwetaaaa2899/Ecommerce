@@ -1,5 +1,13 @@
 import axios from "axios";
 
+export const  formatDate=(date)=> {
+    console.log("date",date)
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
 export const getAllProducts = async () => {
   try {
     const request = await axios.get("https://fakestoreapi.com/products");
@@ -56,20 +64,16 @@ export const getAllCartProducts = async () => {
   }
 };
 
-export const addProductToCart = async ({ userId, date, products }) => {
+export const addProductToCart = async (product) => {
   try {
-    console.log("prod in api", userId, formatDate(date), products);
-    const request = await axios.post("https://fakestoreapi.com/carts", {
-      userId,
-      date:formatDate(date),
-      products,
-    });
+    const request = await axios.post("https://fakestoreapi.com/carts", 
+        product);
 
     const response = await request.data;
     console.log("res", response);
     return response;
   } catch (e) {
-    console.log("error occured while adding to wishlist products", e);
+    console.log("error occured while adding  product to cart ", e);
   }
 };
 
@@ -83,13 +87,7 @@ const increaseCartQuant = async (product) => {
     console.log("some issue occured while updating quantity");
   }
 };
-export const  formatDate=(date)=> {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
-    const day = String(date.getDate()).padStart(2, '0');
-    
-    return `${year}-${month}-${day}`;
-  }
+
 export default {
   getAllProducts,
   getAllProductById,

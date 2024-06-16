@@ -5,9 +5,10 @@ import { ClipLoader } from "react-spinners";
 
 import "./Home.css"
 const Home = () => {
-  const { getAllListingProducts, state } = useProductContext();
+  const { getAllListingProducts, state ,dispatch} = useProductContext();
 
   useEffect(() => {
+
     getAllListingProducts();
   }, []);
   return (

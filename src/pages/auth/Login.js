@@ -46,29 +46,29 @@ return (
         <div className="form-box">
          
 
-          <form className="form-login" >
+          <form className="form-login"  >
           
               <label>
-                <p>
+                <span>
                   <h3>Username:</h3>
 
                   <input
                     required
-                    value={authInfo?.username}
+                    defaultValue={authInfo?.username}
                     type="text"
                     name="username"
                     placeholder="Your username"
                   />    
-                </p>
+                </span>
               </label>
 
               <label>
-                <p>
+                <span>
                   <h3>Password:</h3>
                   <div className="password-input">
                   <input
                     required
-                    value={authInfo?.password}
+                    defaultValue={authInfo?.password}
                     className="password"
                     name="password"
                     type={passwordVisible ? "text" : "password"}
@@ -85,12 +85,12 @@ return (
                         )}
                       </span>
                       </div>
-                </p>
+                </span>
               </label>
 
               <div className="btn-login-container">
                
-                <button type = "submit" onClick={loginAsGuestHandler} className="submitBtn">
+                <button type = "button" onClick={loginAsGuestHandler} className="submitBtn">
                   Login As Guest?
                 </button>
               </div>
